@@ -1,0 +1,13 @@
+Flask
+Flask-RESTful
+Flask-SQLAlchemy
+flask-marshmallow
+marshmallow
+marshmallow-enum
+marshmallow-sqlalchemy
+SQLAlchemy
+pytest
+pytest-flask
+coverage
+pytest-cov
+requests
