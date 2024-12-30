@@ -3,8 +3,7 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from views import *
 from os import environ
-
-db = SQLAlchemy()
+from models import db
 
 def create_flask_app():
     dbURL = "postgresql://{}:{}@{}:{}/{}".format(environ.get('DB_USER', ""), environ.get('DB_PASSWORD', ""), 
