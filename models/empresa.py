@@ -10,12 +10,12 @@ class Empresa(db.Model):
 
     usuarios = db.relationship("User", back_populates="empresa")  # Relación con Empresa
 
-
+    #Borrar en un futuro--->
     """ def __init__(self):
         from models import User  # Importación aquí, cuando realmente se necesite
-        self.usuarios = db.relationship(User, back_populates='empresa', lazy=True) """
+        self.usuarios = db.relationship(User, back_populates='empresa', lazy=True) """ #<---
 
-    """logo = db.Column(db.LargeBinary, nullable=True)  # Campo binario para la imagen"""
+    logo = db.Column(db.LargeBinary, nullable=True)  # Campo binario para la imagen
     # Relación con empleados
     empleados = db.relationship("Empleado", back_populates="empresa") 
 
@@ -41,23 +41,22 @@ class Contratante(Empresa):
     proyectos_contratante = db.relationship("Proyecto", back_populates="contratante", cascade="all, delete-orphan")
 
     # Relaciones uno-a-muchos
-    """ areas = db.relationship("Area", back_populates="contratante", cascade="all, delete-orphan")
+    areas = db.relationship("Area", back_populates="contratante", cascade="all, delete-orphan")
     ubicaciones = db.relationship("Ubicacion", back_populates="contratante", cascade="all, delete-orphan")
     lugares = db.relationship("Lugar", back_populates="contratante", cascade="all, delete-orphan")
-    ciudades = db.relationship("Ciudad", back_populates="contratante", cascade="all, delete-orphan") """
+    ciudades = db.relationship("Ciudad", back_populates="contratante", cascade="all, delete-orphan")
 
     __mapper_args__ = {
         'polymorphic_identity': 'contratante',
     }
 
-""" #Tablas Arrays
+#Tablas Arrays
 
 class Area(db.Model):
     __tablename__ = 'area'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombre = db.Column(db.String, nullable=False)
     contratante_id = db.Column(db.String, db.ForeignKey('contratante.id'), nullable=False)
-
     contratante = db.relationship("Contratante", back_populates="areas")
 
 class Ubicacion(db.Model):
@@ -65,7 +64,6 @@ class Ubicacion(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     direccion = db.Column(db.String, nullable=False)
     contratante_id = db.Column(db.String, db.ForeignKey('contratante.id'), nullable=False)
-
     contratante = db.relationship("Contratante", back_populates="ubicaciones")
 
 class Lugar(db.Model):
@@ -73,7 +71,6 @@ class Lugar(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombre = db.Column(db.String, nullable=False)
     contratante_id = db.Column(db.String, db.ForeignKey('contratante.id'), nullable=False)
-
     contratante = db.relationship("Contratante", back_populates="lugares")
 
 class Ciudad(db.Model):
@@ -81,5 +78,4 @@ class Ciudad(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombre = db.Column(db.String, nullable=False)
     contratante_id = db.Column(db.String, db.ForeignKey('contratante.id'), nullable=False)
-
-    contratante = db.relationship("Contratante", back_populates="ciudades") """
+    contratante = db.relationship("Contratante", back_populates="ciudades")

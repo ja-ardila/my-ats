@@ -40,8 +40,8 @@ class Trabajador(Empleado):
     grupoSanguineo = db.Column(Enum(grupoSanguineo), default=grupoSanguineo.OP)
     fechaNacimiento = db.Column(db.Date, nullable=False)
     fechaIngreso = db.Column(db.Date, nullable=False)
-    vencimientoMedico = db.Column(db.Date, nullable=False)
-    vencimientoCurso = db.Column(db.Date, nullable=False)
+    vencimientoMedico = db.Column(db.Date, nullable=True)
+    vencimientoCurso = db.Column(db.Date, nullable=True)
 
 
     __mapper_args__ = {
