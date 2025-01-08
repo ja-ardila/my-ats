@@ -22,11 +22,35 @@ def test_example(client, app):
             correo = "correo@usuario.com",
             tipoUsuario = "CONTRATANTE"
         )
+        admin2 = User(
+            usuario = "admin_user2",
+            contrasena = "password2",
+            empresa = contratista,
+            correo = "correo2@usuario.com",
+            tipoUsuario = "CONTRATISTA_ADMIN"
+        )
+        user1 = User(
+            usuario = "user1",
+            contrasena = "password2",
+            empresa = contratista,
+            correo = "correo3@usuario.com",
+            tipoUsuario = "CONTRATISTA_NOADMIN"
+        )
+        user2 = User(
+            usuario = "user2",
+            contrasena = "password2",
+            empresa = contratista,
+            correo = "correo4@usuario.com",
+            tipoUsuario = "CONTRATISTA_NOADMIN"
+        )
 
         # Agregar datos a la base de datos
         db.session.add(contratista)
         db.session.add(contratante)
         db.session.add(admin)
+        db.session.add(admin2)
+        db.session.add(user1)
+        db.session.add(user2)
         db.session.commit()
 
         print("\nPrueba de contratantes")
@@ -40,14 +64,29 @@ def test_example(client, app):
             print(contratista.nombre)
 
         # Crear un proyecto asociado
-        proyecto = Proyecto(
-            nombre="Proyecto de Prueba",
+        proyecto1 = Proyecto(
+            nombre="Proyecto A",
             contratista=contratista,
             contratante=contratante,
             admin=admin
         )
+        proyecto2 = Proyecto(
+            nombre="Proyecto B",
+            contratista=contratista,
+            contratante=contratante,
+            admin=admin2
+        )
 
-        db.session.add(proyecto)
+        db.session.add(proyecto1)
+        db.session.add(proyecto2)
+        db.session.commit()
+
+        usuarios = User.query.all()
+        proyectos = Proyecto.query.all()
+        proyectos[0].usuarios.append(usuarios[0])
+        proyectos[1].usuarios.append(usuarios[3])
+        proyectos[1].usuarios.append(usuarios[2])
+        usuarios[3].proyectos.append(proyectos[1])
         db.session.commit()
 
         proyectos = Proyecto.query.all()
@@ -59,13 +98,13 @@ def test_example(client, app):
             print(proyecto.nombre)
             print(proyecto.usuarios)
 
-        admin.empresa_id = 1
-
         print("\nPrueba de admin user")
         usuarios = User.query.all()
         for usuario in usuarios:
             print(usuario.usuario)
             print(usuario.empresa)
+            print(usuario.proyectos)
+            print(usuario.proyectos_administrados)
 
         #Crear empleados
         empleadoT = Trabajador(
