@@ -1,6 +1,16 @@
 from flask import Flask
 from flask_restful import Api
-from views import *
+from views import ATSView
+from views import PTView
+from views import PreusoView
+from views import FirmaView
+from views import HerramientaView
+from views import EPPView
+from views import TrabajadorView
+from views import AutorizadorView
+from views import Pregunta_PTView
+from views import EmpresaView
+from views import ProyectoView
 from os import environ
 from models import db
 
@@ -21,6 +31,17 @@ def create_flask_app():
 
 def endpoints(app):
     api = Api(app)
+    api.add_resource(ATSView, '/ats')
+    api.add_resource(PTView, '/pt')
+    api.add_resource(PreusoView, '/preuso')
+    api.add_resource(FirmaView, '/firma')
+    api.add_resource(HerramientaView, '/herramienta')
+    api.add_resource(EPPView, '/epp')
+    api.add_resource(TrabajadorView, '/trabajador')
+    api.add_resource(AutorizadorView, '/autorizador')
+    api.add_resource(Pregunta_PTView, '/pregunta pt')
+    api.add_resource(EmpresaView, '/empresa')
+    api.add_resource(ProyectoView, '/proyecto')
     #api.add_resource(UsersView, '/users')
 
 
